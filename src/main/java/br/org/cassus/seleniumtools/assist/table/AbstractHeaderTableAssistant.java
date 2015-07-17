@@ -7,9 +7,9 @@ import java.util.Map;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public abstract class AbstractHeaderTableAssistant extends AbstractTableAssitant {
+public abstract class AbstractHeaderTableAssistant extends AbstractTableAssistant {
 	
-	public AbstractHeaderTableAssistant(WebElement table) {
+	protected AbstractHeaderTableAssistant(WebElement table) {
 		super(table);
 	}
 
@@ -22,6 +22,17 @@ public abstract class AbstractHeaderTableAssistant extends AbstractTableAssitant
 	
 	protected abstract By getColumnLocator();
 
+	/**
+	 * This method is used to retrieve a value by using a column name and value as a reference.
+	 * 
+	 * The call <b>getValueByReference("Name","John","E-mail")</b> will return the value of column "E-mail" in the row the column "Name" is "John"
+	 * 
+	 * @param  referenceCol the name of the column to be used as a reference
+	 * @param  referenceVal the value expected to be the reference
+	 * @param  actualCol the name of the column in which the content needs to be retrieved
+	 * 
+	 * @return a string with the contents of the cell
+	 * **/
 	public String getValueByReference(String referenceCol, String referenceVal, String actualCol) {
 		initColumns();
 		int refColIndex = getColIndex(referenceCol);
@@ -30,6 +41,16 @@ public abstract class AbstractHeaderTableAssistant extends AbstractTableAssitant
 		return getValueByPosition(actualRowIndex, actualColIndex);
 	}
 	
+	/**
+	 * This method is used to retrieve a value by using a column name and line index.
+	 * 
+	 * The call <b>getValueByColumnAndLine("Name",2)</b> will return the value of column "Name" in the row number 2.
+	 * 
+	 * @param  colName the name of the column to have the value retrieved
+	 * @param  row the row you want to read
+	 * 
+	 * @return a string with the contents of the cell
+	 * **/
 	public String getValueByColumnAndLine(String colName, int row) {
 		initColumns();	
 		int colIndex = getColIndex(colName);

@@ -5,9 +5,9 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import br.org.cassus.seleniumtools.assist.table.AbstractTableAssitant;
+import br.org.cassus.seleniumtools.assist.table.AbstractTableAssistant;
 
-public abstract class AbstractTableAssistTest<T extends AbstractTableAssitant> {
+public abstract class AbstractTableAssistTest<T extends AbstractTableAssistant> {
 	
 	T tableAssist;
 	static WebDriver driver;
