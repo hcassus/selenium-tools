@@ -13,7 +13,7 @@ public abstract class AbstractTableAssistTest<T extends AbstractTableAssistant> 
 	WebDriver driver;
 	protected By tableLocator;
 	
-	public AbstractTableAssistTest(WebDriver driver) {
+	public AbstractTableAssistTest(final WebDriver driver) {
 		this.driver = driver;
 	}
 	

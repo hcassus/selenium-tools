@@ -11,7 +11,7 @@ public class ExplicitHeaderTableAssistant extends AbstractHeaderTableAssistant {
 	 * 
 	 * @param  table the selenium table WebElement you need help dealing with.
 	 * **/
-	public ExplicitHeaderTableAssistant(WebElement table) {
+	public ExplicitHeaderTableAssistant(final WebElement table) {
 		super(table);
 	}
 

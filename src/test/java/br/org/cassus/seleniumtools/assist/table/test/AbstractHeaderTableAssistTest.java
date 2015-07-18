@@ -10,7 +10,7 @@ public abstract class AbstractHeaderTableAssistTest<T extends AbstractHeaderTabl
 	
 	
 	
-	public AbstractHeaderTableAssistTest(WebDriver driver) {
+	public AbstractHeaderTableAssistTest(final WebDriver driver) {
 		super(driver);
 	}
 
