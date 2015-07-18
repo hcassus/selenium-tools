@@ -10,11 +10,11 @@ import br.org.cassus.seleniumtools.assist.table.AbstractTableAssistant;
 public abstract class AbstractTableAssistTest<T extends AbstractTableAssistant> {
 	
 	T tableAssist;
-	static WebDriver driver;
+	WebDriver driver;
 	protected By tableLocator;
 	
 	public AbstractTableAssistTest(WebDriver driver) {
-		AbstractTableAssistTest.driver = driver;
+		this.driver = driver;
 	}
 	
 	@Test
