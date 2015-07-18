@@ -5,19 +5,21 @@ import org.openqa.selenium.WebElement;
 
 public class ImplicitHeaderTableAssistant extends AbstractHeaderTableAssistant {
 	
-	private int headerLines = 1;
+	private final int headerLines;
 	
 	/**
-	 * ImplicitHeaderTableAssistant should be used whenever you don't have a "thead" element on your table and your first "tbody" row contains the column names.
+	 * ImplicitHeaderTableAssistant should be used whenever you don't have a "thead" 
+	 * element on your table and your first "tbody" row contains the column names.
 	 * 
 	 * @param  table the selenium table WebElement you need help dealing with.
 	 * **/
-	public ImplicitHeaderTableAssistant(WebElement table) {
+	public ImplicitHeaderTableAssistant(final WebElement table) {
 		super(table);
+		this.headerLines = 1;
 	}
 
 	@Override
-	protected By getColumnLocator() {
+	protected By getHeaderColumnLocator() {
 		return By.xpath("./tbody/tr[1]/*");
 	}
 
@@ -27,12 +29,12 @@ public class ImplicitHeaderTableAssistant extends AbstractHeaderTableAssistant {
 	}
 
 	@Override
-	public String getValueByPosition(int row, int column) {		
+	public String getValueByPosition(final int row,final int column) {		
 		return super.getValueByPosition(row + headerLines, column);
 	}
 	
 	@Override
-	protected int getRowIndex(int refColIndex, String referenceVal) {
+	protected int getRowIndex(final int refColIndex, final String referenceVal) {
 		return super.getRowIndex(refColIndex, referenceVal) - headerLines;
 	}
 }

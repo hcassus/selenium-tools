@@ -7,53 +7,57 @@ import java.util.Map;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public abstract class AbstractHeaderTableAssistant extends AbstractTableAssistant {
+/**
+ * Defines operations on tables containing headers
+ * **/
+public abstract class AbstractHeaderTableAssistant extends AbstractTableAssistant implements HeadersTableAssist {
 	
-	protected AbstractHeaderTableAssistant(WebElement table) {
+	protected Map<String, Integer> colIndexMap;
+	/**
+	 * A "By" locator that identifies the header column locators 
+	 * in order to enable navigating by column names
+	 * **/
+	protected By headerColLocator = getHeaderColumnLocator();
+	
+	protected AbstractHeaderTableAssistant(final WebElement table) {
 		super(table);
 	}
 
-	protected Map<String, Integer> colIndexMap;
-	protected By columnLocator = getColumnLocator(); 
+
 	
-	private int getColIndex(String colName) {
+	private int getColIndex(final String colName) {
 		return colIndexMap.get(colName);
 	}
 	
-	protected abstract By getColumnLocator();
+	/****
+	 * @return a by locator representing all the column header cells
+	 */
+	protected abstract By getHeaderColumnLocator();
 
 	/**
-	 * This method is used to retrieve a value by using a column name and value as a reference.
-	 * 
-	 * The call <b>getValueByReference("Name","John","E-mail")</b> will return the value of column "E-mail" in the row the column "Name" is "John"
-	 * 
+	 * Retrieves a value by using a column name and value as a reference.	   
 	 * @param  referenceCol the name of the column to be used as a reference
 	 * @param  referenceVal the value expected to be the reference
-	 * @param  actualCol the name of the column in which the content needs to be retrieved
-	 * 
+	 * @param  actualCol the name of the column to retrieve contents
 	 * @return a string with the contents of the cell
 	 * **/
-	public String getValueByReference(String referenceCol, String referenceVal, String actualCol) {
+	public String getValueByReference(final String refColName, final String referenceVal, final String actualColName) {
 		initColumns();
-		int refColIndex = getColIndex(referenceCol);
-		int actualColIndex = getColIndex(actualCol);
-		int actualRowIndex = getRowIndex(refColIndex,referenceVal);
+		final int refColIndex = getColIndex(refColName);
+		final int actualColIndex = getColIndex(actualColName);
+		final int actualRowIndex = getRowIndex(refColIndex,referenceVal);
 		return getValueByPosition(actualRowIndex, actualColIndex);
 	}
 	
 	/**
-	 * This method is used to retrieve a value by using a column name and line index.
-	 * 
-	 * The call <b>getValueByColumnAndLine("Name",2)</b> will return the value of column "Name" in the row number 2.
-	 * 
+	 * Retrieves the value of a cell by using a column name and line index.
 	 * @param  colName the name of the column to have the value retrieved
 	 * @param  row the row you want to read
-	 * 
 	 * @return a string with the contents of the cell
 	 * **/
-	public String getValueByColumnAndLine(String colName, int row) {
+	public String getValueByColumnAndLine(final String colName,final int row) {
 		initColumns();	
-		int colIndex = getColIndex(colName);
+		final int colIndex = getColIndex(colName);
 		return getValueByPosition(row, colIndex);
 	}
 	
@@ -61,10 +65,10 @@ public abstract class AbstractHeaderTableAssistant extends AbstractTableAssistan
 		if(colIndexMap == null){
 			colIndexMap = new HashMap<String, Integer>();
 			
-			List <WebElement> headers = table.findElements(columnLocator);
+			final List <WebElement> headers = table.findElements(headerColLocator);
 			int index = 1;
-			for (WebElement header : headers) {
-				String text = header.getText();
+			for (final WebElement header : headers) {
+				final String text = header.getText();
 				colIndexMap.put(text, index);
 				index++;
 			}
