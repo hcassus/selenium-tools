@@ -1,4 +1,9 @@
 test:
   override:
-    - case $CIRCLE_NODE_INDEX in 0) mvn -Dtest=TableFactoryTest test ;; 1) mvn -Dtest=ImplicitHeaderTableAssistTest test ;; 2) mvn -Dtest=ExplicitHeaderTableAssistTest ;; 3) mvn -Dtest=HeaderlessTableAssistTest ;;esac:
+    - case $CIRCLE_NODE_INDEX in
+        0) mvn -Dtest=TableFactoryTest test ;;
+        1) mvn -Dtest=ImplicitHeaderTableAssistTest test ;;
+        2) mvn -Dtest=ExplicitHeaderTableAssistTest test;;
+        3) mvn -Dtest=HeaderlessTableAssistTest test;;
+        esac:
         parallel: true
