@@ -2,3 +2,7 @@ test:
   override:
     - case $CIRCLE_NODE_INDEX in 0) mvn -Dtest=TableFactoryTest test ;;1) mvn -Dtest=ImplicitHeaderTableAssistTest test ;;2) mvn -Dtest=ExplicitHeaderTableAssistTest test;;3) mvn -Dtest=HeaderlessTableAssistTest test;;esac:
         parallel: true
+
+    post:
+      - mkdir -p $CIRCLE_TEST_REPORTS/junit/
+      - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
