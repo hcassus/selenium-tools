@@ -9,11 +9,13 @@ bin/
 *.war
 *.ear
 
-#eclipse settings
+#IDE settings
 .settings/
 .project
 .classpath
 target/
+.idea/
+selenium-tools.iml
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
